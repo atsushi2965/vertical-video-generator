@@ -98,7 +98,7 @@ if [ -n "$ADDITIONAL_TEXT" ]; then
     [template][video]overlay=x=(W-w)/2:y=(H-h)/2$VIDEO_OFFSET[overlay];\
     [overlay]drawtext=fontfile=$FONT_FILE:text='$TEXT':x=(w-text_w)/2:y=$TEXT_OFFSET-text_h:fontcolor=white:fontsize=$FONT_SIZE[text1];\
     [text1]drawtext=fontfile=$FONT_FILE:text='$ADDITIONAL_TEXT':x=(w-text_w)/2:y=$TEXT_OFFSET:fontcolor=white:fontsize=$FONT_SIZE\
-    " "$OUTPUT_FILE"
+    " -c:a copy -movflags +faststart "$OUTPUT_FILE"
 else
     # タイトルテキストが1行の場合
     ffmpeg -i "$BASE_FILE" -i "$VIDEO_FILE" -filter_complex "\
@@ -106,5 +106,5 @@ else
     [1:v]scale=$VIDEO_SCALE[video];\
     [template][video]overlay=x=(W-w)/2:y=(H-h)/2$VIDEO_OFFSET[overlay];\
     [overlay]drawtext=fontfile=$FONT_FILE:text='$TEXT':x=(w-text_w)/2:y=$TEXT_OFFSET-text_h/2:fontcolor=white:fontsize=$FONT_SIZE\
-    " "$OUTPUT_FILE"
+    " -c:a copy -movflags +faststart "$OUTPUT_FILE"
 fi
